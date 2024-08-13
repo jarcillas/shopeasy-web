@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <h1>ShopEasy</h1>
+      <div className="content">
+        <div className="sidebar">
+          <h3>Shop Lists</h3>
+          <ul>
+            <li>
+              <a href="/shoplist/1">Groceries</a>
+            </li>
+            <li>
+              <a href="/shoplist/2">Toiletries</a>
+            </li>
+            <li>
+              <a href="/shoplist/3">Clothes</a>
+            </li>
+          </ul>
+        </div>
+        <div className="shoplist">
+          <h2>Groceries</h2>
+          <ul>
+            <li className="shoplist-item">
+              <div className="shoplist-item__title">Vinegar (100 ml)</div>
+              <div className="shoplist-item__qty">2</div>
+              <div className="shoplist-item__unit">pc</div>
+              <div className="shoplist-item__unit-price">PHP 12.50</div>
+              <div className="shoplist-item__total-price">PHP 25.00</div>
+            </li>
+            <li className="shoplist-item">
+              <div className="shoplist-item__title">Chicken Breasts</div>
+              <div className="shoplist-item__qty">0.5</div>
+              <div className="shoplist-item__unit">kg</div>
+              <div className="shoplist-item__unit-price">PHP 250.00</div>
+              <div className="shoplist-item__total-price">PHP 125.00</div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
