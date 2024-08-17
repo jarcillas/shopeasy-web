@@ -7,14 +7,14 @@ function App() {
       <div className="content">
         <div className="sidebar">
           <h3>Shop Lists</h3>
-          <ul>
-            <li>
+          <ul className="shoplist-links">
+            <li className="shoplist-link-item">
               <a href="/shoplist/1">Groceries</a>
             </li>
-            <li>
+            <li className="shoplist-link-item">
               <a href="/shoplist/2">Toiletries</a>
             </li>
-            <li>
+            <li className="shoplist-link-item">
               <a href="/shoplist/3">Clothes</a>
             </li>
           </ul>
