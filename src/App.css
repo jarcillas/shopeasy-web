@@ -41,10 +41,9 @@ h6 {
 
 .header {
   font-weight: 700;
-  letter-spacing: -0.02em;
-  font-family: 'New Amsterdam', sans-serif;
   height: 80px;
   line-height: 80px;
+  letter-spacing: -0.02em;
 }
 
 .content {
@@ -64,14 +63,17 @@ h6 {
 .content h2,
 .content h3 {
   color: var(--primary-light);
+  font-family: 'New Amsterdam', sans-serif;
 }
 
 .sidebar {
   flex: 0 1 200px;
 }
 
-.shoplist {
+.shoplist-wrapper {
   flex: 1 1 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 ul {
@@ -82,15 +84,62 @@ ul {
   padding-inline-start: 1em;
 }
 
-.shoplist-link-item + .shoplist-link-item {
+.shoplist-links__item + .shoplist-links__item {
+  margin-top: 0.2em;
+}
+
+.shoplist-links__item a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 10pt;
+}
+
+.shoplist-links__item a:hover {
+  color: var(--secondary-light);
+}
+
+.shoplist {
+  padding-inline-start: 0;
+}
+
+.shoplist-item + .shoplist-item {
   margin-top: 0.5em;
 }
 
-.shoplist-link-item a {
-  text-decoration: none;
-  color: var(--text);
+.shoplist-item,
+.shoplist-input {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.6em 1em;
+
+  border-radius: 0.6em;
+  font-size: 10pt;
 }
 
-.shoplist-link-item a:hover {
-  color: var(--secondary-light);
+.shoplist-item {
+  background-color: var(--background-dark);
+}
+
+.shoplist-input {
+  /* background-color: var(--primary-light); */
+  margin-top: 1rem;
+}
+
+.shoplist-input > input {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  color: var(--primary-light);
+  border-bottom: 2px solid var(--primary-light);
+  outline: none;
+  display: block;
+  height: 20px;
+  font-weight: 600;
+}
+
+.shoplist-input > input:focus {
+  background-color: var(--background-dark);
 }
