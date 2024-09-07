@@ -1,5 +1,5 @@
 import './App.css';
-import { Content } from './components/Content';
+import { Content } from './components/Content.tsx';
 
 function App() {
   return (

@@ -1,4 +1,6 @@
-const Shoplist = ({ shoplist = [] }) => (
+import { ShoplistItem } from './types';
+
+const Shoplist = ({ shoplist = [] }: { shoplist: ShoplistItem[] }) => (
   <ul className="shoplist">
     {shoplist.map((shoplistItem, shoplistItemIdx) => (
       <li key={shoplistItemIdx} className="shoplist-item">

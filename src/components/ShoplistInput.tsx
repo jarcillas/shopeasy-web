@@ -1,5 +1,19 @@
-const ShoplistInput = ({ inputValue, setInputValue, addItem }) => {
-  const onInputChange = (prop, newValue) => {
+import { ShoplistItemInput } from './types';
+
+const ShoplistInput = ({
+  inputValue,
+  setInputValue,
+  addItem,
+}: {
+  inputValue: ShoplistItemInput;
+  setInputValue: Function;
+  addItem: Function;
+}) => {
+  const onInputChange = (prop: string, newValue: string) => {
+    if (prop === 'qty' || prop === 'unitPrice') {
+      setInputValue({ ...inputValue, [prop]: Number(newValue) });
+      return;
+    }
     setInputValue({ ...inputValue, [prop]: newValue });
   };
 
@@ -27,7 +41,7 @@ const ShoplistInput = ({ inputValue, setInputValue, addItem }) => {
         placeholder="Quantity"
         value={String(inputValue.qty)}
         onChange={(e) => {
-          onInputChange('qty', Number(e.target.value));
+          onInputChange('qty', e.target.value);
         }}
       />
       <input
@@ -45,11 +59,13 @@ const ShoplistInput = ({ inputValue, setInputValue, addItem }) => {
         placeholder="Unit Price"
         value={String(inputValue.unitPrice)}
         onChange={(e) => {
-          onInputChange('unitPrice', Number(e.target.value));
+          onInputChange('unitPrice', e.target.value);
         }}
       />
       <div className="shoplist-input__total-price">
-        {inputValue.qty * inputValue.unitPrice}
+        {inputValue.qty && inputValue.unitPrice
+          ? inputValue.qty * inputValue.unitPrice
+          : ''}
       </div>
       <input type="submit" value="Add Item" />
     </form>
