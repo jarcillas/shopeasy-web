@@ -9,12 +9,14 @@ import { ShoplistItem, ShoplistItemInput } from './types';
 
 const shoplistInit = [
   {
+    id: 1,
     title: 'Vinegar (100 mL)',
     qty: 2,
     unit: 'pc',
     unitPrice: 12.5,
   },
   {
+    id: 2,
     title: 'Chicken (per kg)',
     qty: 3,
     unit: 'kg',
