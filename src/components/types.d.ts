@@ -1,7 +1,8 @@
 export interface ShoplistItem {
+  id: number;
   qty: number;
   unitPrice: number;
-  unit: string;
+  unit?: string;
   title: string;
 }
 
@@ -10,4 +11,9 @@ export interface ShoplistItemInput {
   unitPrice: number | null;
   unit: string;
   title: string;
+}
+
+export interface Shoplist {
+  id: number;
+  lists: ShoplistItem[];
 }
