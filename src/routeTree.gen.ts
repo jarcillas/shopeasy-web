@@ -16,10 +16,16 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const ShoplistLazyImport = createFileRoute('/shoplist')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const ShoplistLazyRoute = ShoplistLazyImport.update({
+  path: '/shoplist',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/shoplist.lazy').then((d) => d.Route))
 
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
@@ -49,6 +55,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
+    '/shoplist': {
+      id: '/shoplist'
+      path: '/shoplist'
+      fullPath: '/shoplist'
+      preLoaderRoute: typeof ShoplistLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -57,36 +70,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
+  '/shoplist': typeof ShoplistLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
+  '/shoplist': typeof ShoplistLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
+  '/shoplist': typeof ShoplistLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/about' | '/shoplist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/about' | '/shoplist'
+  id: '__root__' | '/' | '/about' | '/shoplist'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutLazyRoute: typeof AboutLazyRoute
+  ShoplistLazyRoute: typeof ShoplistLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutLazyRoute: AboutLazyRoute,
+  ShoplistLazyRoute: ShoplistLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -102,7 +120,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/shoplist"
       ]
     },
     "/": {
@@ -110,6 +129,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.lazy.tsx"
+    },
+    "/shoplist": {
+      "filePath": "shoplist.lazy.tsx"
     }
   }
 }
