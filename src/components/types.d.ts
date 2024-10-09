@@ -15,5 +15,6 @@ export interface ShoplistItemInput {
 
 export interface Shoplist {
   id: number;
-  lists: ShoplistItem[];
+  title: string;
+  items: ShoplistItem[];
 }
