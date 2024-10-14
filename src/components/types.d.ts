@@ -2,7 +2,7 @@ export interface ShoplistItem {
   id: number;
   qty: number;
   unitPrice: number;
-  unit?: string;
+  unit: string | null;
   title: string;
 }
 

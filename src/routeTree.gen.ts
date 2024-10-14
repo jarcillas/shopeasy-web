@@ -13,19 +13,14 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ShoplistShoplistIdImport } from './routes/shoplist/$shoplistId'
 
 // Create Virtual Routes
 
-const ShoplistLazyImport = createFileRoute('/shoplist')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
-
-const ShoplistLazyRoute = ShoplistLazyImport.update({
-  path: '/shoplist',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/shoplist.lazy').then((d) => d.Route))
 
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
@@ -36,6 +31,11 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const ShoplistShoplistIdRoute = ShoplistShoplistIdImport.update({
+  path: '/shoplist/$shoplistId',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -55,11 +55,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/shoplist': {
-      id: '/shoplist'
-      path: '/shoplist'
-      fullPath: '/shoplist'
-      preLoaderRoute: typeof ShoplistLazyImport
+    '/shoplist/$shoplistId': {
+      id: '/shoplist/$shoplistId'
+      path: '/shoplist/$shoplistId'
+      fullPath: '/shoplist/$shoplistId'
+      preLoaderRoute: typeof ShoplistShoplistIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -70,41 +70,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
-  '/shoplist': typeof ShoplistLazyRoute
+  '/shoplist/$shoplistId': typeof ShoplistShoplistIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
-  '/shoplist': typeof ShoplistLazyRoute
+  '/shoplist/$shoplistId': typeof ShoplistShoplistIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
-  '/shoplist': typeof ShoplistLazyRoute
+  '/shoplist/$shoplistId': typeof ShoplistShoplistIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/shoplist'
+  fullPaths: '/' | '/about' | '/shoplist/$shoplistId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/shoplist'
-  id: '__root__' | '/' | '/about' | '/shoplist'
+  to: '/' | '/about' | '/shoplist/$shoplistId'
+  id: '__root__' | '/' | '/about' | '/shoplist/$shoplistId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutLazyRoute: typeof AboutLazyRoute
-  ShoplistLazyRoute: typeof ShoplistLazyRoute
+  ShoplistShoplistIdRoute: typeof ShoplistShoplistIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutLazyRoute: AboutLazyRoute,
-  ShoplistLazyRoute: ShoplistLazyRoute,
+  ShoplistShoplistIdRoute: ShoplistShoplistIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -121,7 +121,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/shoplist"
+        "/shoplist/$shoplistId"
       ]
     },
     "/": {
@@ -130,8 +130,8 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.lazy.tsx"
     },
-    "/shoplist": {
-      "filePath": "shoplist.lazy.tsx"
+    "/shoplist/$shoplistId": {
+      "filePath": "shoplist/$shoplistId.tsx"
     }
   }
 }
