@@ -1,18 +1,17 @@
 import { ShoplistItem } from './types';
 
 const Shoplist = ({ shoplist = [] }: { shoplist: ShoplistItem[] }) => (
-  <ul className="shoplist">
+  <ul className="p-4 w-full">
     {shoplist.map((shoplistItem, shoplistItemIdx) => (
-      <li key={shoplistItemIdx} className="shoplist-item">
-        <div className="shoplist-item__title">{shoplistItem.title}</div>
-        <div className="shoplist-item__qty">{shoplistItem.qty}</div>
-        <div className="shoplist-item__unit">{shoplistItem.unit}</div>
-        <div className="shoplist-item__unit-price">
-          {shoplistItem.unitPrice}
-        </div>
-        <div className="shoplist-item__total-price">
-          {shoplistItem.qty * shoplistItem.unitPrice}
-        </div>
+      <li
+        key={shoplistItemIdx}
+        className="flex flex-row w-[800px] bg-slate-500 justify-between rounded-md my-4 p-2"
+      >
+        <div>{shoplistItem.title}</div>
+        <div>{shoplistItem.qty}</div>
+        <div>{shoplistItem.unit}</div>
+        <div>{shoplistItem.unitPrice}</div>
+        <div>{shoplistItem.qty * shoplistItem.unitPrice}</div>
       </li>
     ))}
   </ul>
