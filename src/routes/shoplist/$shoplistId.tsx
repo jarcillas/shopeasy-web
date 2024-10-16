@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { shoplists } from '../../data.json';
 import { Shoplist } from '../../components/Shoplist';
+import { Total } from '../../components/Total';
 
 export const Route = createFileRoute('/shoplist/$shoplistId')({
   component: () => {
@@ -9,13 +10,14 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
     const shoplist = shoplists?.[Number(shoplistId)];
 
     if (!shoplist) {
-      return <div>Shoplist does not exist!</div>;
+      return <div className="mt-4">Shoplist does not exist!</div>;
     }
 
     return (
-      <div>
-        <h1 className="text-lg font-bold mt-4">{shoplist.title}</h1>
+      <div className="mt-4">
+        <h1 className="text-lg font-bold">{shoplist.title}</h1>
         <Shoplist shoplist={shoplist.items} />
+        <Total shoplist={shoplist.items} />
       </div>
     );
   },

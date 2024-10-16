@@ -1,16 +1,21 @@
+import { Link } from '@tanstack/react-router';
+
+import { shoplists } from '../data.json';
+
 const Sidebar = () => (
-  <div className="sidebar">
-    <h2>Shoplists</h2>
-    <ul className="shoplist-links">
-      <li className="shoplist-links__item">
-        <a href="/shoplist/1">Groceries</a>
-      </li>
-      <li className="shoplist-links__item">
-        <a href="/shoplist/2">Toiletries</a>
-      </li>
-      <li className="shoplist-links__item">
-        <a href="/shoplist/3">Clothes</a>
-      </li>
+  <div className="flex flex-col grow-1 shrink-0 basis-[200px] m-4 space-y-4">
+    <h2 className="font-semibold">Shoplists</h2>
+    <ul className="flex flex-col ml-4 space-y-2">
+      {shoplists.map((list, listIdx) => (
+        <li>
+          <Link
+            to="/shoplist/$shoplistId"
+            params={{ shoplistId: String(listIdx) }}
+          >
+            {list.title}
+          </Link>
+        </li>
+      ))}
     </ul>
   </div>
 );
