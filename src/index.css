@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --primary-dark: #006d77;
   --primary-light: #83c5be;
@@ -7,7 +11,7 @@
   --background-dark: #36454f;
   --background-dark2: hsl(204, 19%, 35%);
 
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

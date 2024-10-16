@@ -1,18 +1,22 @@
 import { useState } from 'react';
 
-import { Sidebar } from './Sidebar';
-import { ShoplistInput } from './ShoplistInput';
-import { Shoplist } from './Shoplist';
-import { Total } from './Total';
+import { Sidebar } from './Sidebar.tsx';
+import { ShoplistInput } from './ShoplistInput.tsx';
+import { Shoplist } from './Shoplist.tsx';
+import { Total } from './Total.tsx';
+
+import { ShoplistItem, ShoplistItemInput } from './types';
 
 const shoplistInit = [
   {
+    id: 1,
     title: 'Vinegar (100 mL)',
     qty: 2,
     unit: 'pc',
     unitPrice: 12.5,
   },
   {
+    id: 2,
     title: 'Chicken (per kg)',
     qty: 3,
     unit: 'kg',
@@ -21,14 +25,15 @@ const shoplistInit = [
 ];
 
 const Content = () => {
-  const [inputValue, setInputValue] = useState({
+  const [inputValue, setInputValue]: [ShoplistItemInput, Function] = useState({
     title: '',
     qty: null,
     unit: '',
     unitPrice: null,
   });
 
-  const [shoplist, setShoplist] = useState(shoplistInit);
+  const [shoplist, setShoplist]: [ShoplistItem[], Function] =
+    useState(shoplistInit);
 
   const addItem = () => {
     setShoplist([...shoplist, inputValue]);
