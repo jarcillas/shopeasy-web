@@ -2,38 +2,37 @@
   "shoplists": [
     {
       "id": 0,
-      "title": "Groceries",
+      "name": "Groceries",
       "items": [
         {
           "id": 0,
-          "title": "Chicken",
+          "name": "Chicken",
           "qty": 1,
           "unit": "kg",
           "unitPrice": 254
         },
         {
           "id": 1,
-          "title": "Peaches",
+          "name": "Peaches",
           "qty": 2,
           "unit": "can",
           "unitPrice": 120
         },
         {
           "id": 2,
-          "title": "Assorted Chips",
+          "name": "Assorted Chips",
           "qty": 1,
-          "unit": null,
           "unitPrice": 187
         }
       ]
     },
     {
       "id": 1,
-      "title": "Medicine",
+      "name": "Medicine",
       "items": [
         {
           "id": 0,
-          "title": "Loratadine",
+          "name": "Loratadine",
           "qty": 6,
           "unit": "tablet",
           "unitPrice": 32
