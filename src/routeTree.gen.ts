@@ -23,16 +23,19 @@ const IndexLazyImport = createFileRoute('/')()
 // Create/Update Routes
 
 const AboutLazyRoute = AboutLazyImport.update({
+  id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 const ShoplistShoplistIdRoute = ShoplistShoplistIdImport.update({
+  id: '/shoplist/$shoplistId',
   path: '/shoplist/$shoplistId',
   getParentRoute: () => rootRoute,
 } as any)
