@@ -1,9 +1,6 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
-// import Store
-import { useStore } from '../store';
-
 import { Sidebar } from '../components/Sidebar';
 import '../index.css';
 
