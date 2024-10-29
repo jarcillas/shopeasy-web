@@ -40,6 +40,14 @@ const ValueInput = ({
           onChange={(e) => {
             setInputValue(e.target.value);
           }}
+          onKeyDown={(e) => {
+            // e.preventDefault();
+            if (e.key === 'Enter') {
+              setClicked(false);
+              // setInputValue((e.target as HTMLInputElement).value);
+              if (handleBlur) handleBlur(e);
+            }
+          }}
         />
       ) : (
         <div>{customDisplay ?? value}</div>
