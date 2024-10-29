@@ -3,17 +3,19 @@ import { useState, useRef, useEffect } from 'react';
 const ValueInput = ({
   value,
   handleBlur,
+  customDisplay,
 }: {
-  value: string | number;
+  value: string | number | undefined;
   handleBlur?: Function;
+  customDisplay?: string;
 }) => {
   const [clicked, setClicked] = useState(false);
-  const [inputValue, setInputValue] = useState(String(value));
+  const [inputValue, setInputValue] = useState(value ? String(value) : '');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Sync state with prop when the prop changes
   useEffect(() => {
-    setInputValue(String(value));
+    setInputValue(value ? String(value) : '');
   }, [value]);
 
   return (
@@ -40,7 +42,7 @@ const ValueInput = ({
           }}
         />
       ) : (
-        <div>{value}</div>
+        <div>{customDisplay ?? value}</div>
       )}
     </div>
   );
