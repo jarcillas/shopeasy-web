@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { Shoplist } from '../../components/Shoplist';
 import { Total } from '../../components/Total';
-import { useStore } from '../../store';
+import { useStore } from '@/store';
 
 export const Route = createFileRoute('/shoplist/$shoplistId')({
   component: () => {
@@ -18,10 +18,10 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
     }
 
     return (
-      <div className="mt-2">
+      <div className="mt-2 text-white">
         <h1 className="text-xl font-bold">What are we buying today?</h1>
         <Shoplist shoplist={shoplist} />
-        <Total shoplist={shoplist.items} />
+        <Total shoplistItems={shoplist.items} />
       </div>
     );
   },
