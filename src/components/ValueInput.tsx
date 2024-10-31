@@ -36,6 +36,9 @@ const ValueInput = ({
           value={inputValue}
           ref={inputRef}
           autoFocus
+          onFocus={(e) => {
+            e.target.select();
+          }}
           onBlur={(e) => {
             e.preventDefault();
             setClicked(false);
