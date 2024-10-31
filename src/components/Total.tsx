@@ -1,12 +1,12 @@
 import { ShoplistItem } from './types';
 import { currencyFormatter } from '../util/number';
 
-const Total = ({ shoplist = [] }: { shoplist: ShoplistItem[] }) => {
+const Total = ({ shoplistItems = [] }: { shoplistItems: ShoplistItem[] }) => {
   const calculateTotal = (values: Array<number>) =>
-    values.reduce((prev, curr) => (prev += curr));
+    values.reduce((prev, curr) => (prev += curr), 0);
 
   const total = calculateTotal(
-    shoplist.map(
+    shoplistItems.map(
       (shoplistItem: ShoplistItem) => shoplistItem.qty * shoplistItem.unitPrice
     )
   );
