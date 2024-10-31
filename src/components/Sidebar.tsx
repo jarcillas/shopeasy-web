@@ -1,23 +1,45 @@
 import { Link } from '@tanstack/react-router';
 
-import { shoplists } from '../data.json';
+import { Button } from './ui/button';
+import { useStore } from '@/store';
 
-const Sidebar = () => (
-  <div className="flex flex-col grow-1 shrink-0 basis-[200px] m-4 space-y-4">
-    <h2 className="font-semibold">Shoplists</h2>
-    <ul className="flex flex-col ml-4 space-y-2">
-      {shoplists.map((list, listIdx) => (
-        <li key={listIdx}>
-          <Link
-            to="/shoplist/$shoplistId"
-            params={{ shoplistId: String(listIdx) }}
+const Sidebar = () => {
+  const shoplists = useStore((state) => state.shoplists);
+  const addShoplist = useStore((state) => state.addShoplist);
+
+  return (
+    <div className="flex flex-col grow-0 shrink-0 w-[200px] m-4 space-y-4">
+      <h2 className="font-semibold text-white">Shoplists</h2>
+      <ul className="flex flex-col ml-4 space-y-2 text-white">
+        {shoplists.map((list, listIdx) => (
+          <li
+            key={listIdx}
+            className="text-ellipsis overflow-hidden whitespace-nowrap"
           >
-            {list.name}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+            <Link
+              to="/shoplist/$shoplistId"
+              params={{ shoplistId: String(listIdx) }}
+            >
+              {list.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Button
+        variant={'outline'}
+        className="w-fit"
+        onClick={() => {
+          addShoplist({
+            id: shoplists.length,
+            name: `Shoplist ${shoplists.length + 1}`,
+            items: [],
+          });
+        }}
+      >
+        New Shoplist
+      </Button>
+    </div>
+  );
+};
 
 export { Sidebar };
