@@ -61,6 +61,7 @@ export const useStore = create<State & Action>()(
         const createdShoplist = {
           ...newShoplist,
           created: Math.floor(new Date().getTime() / 1000),
+          updated: Math.floor(new Date().getTime() / 1000),
         };
         return {
           ...state,

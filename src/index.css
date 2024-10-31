@@ -18,7 +18,6 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* background-color: var(--background-dark); */
-  color: var(--text);
 }
 
 body {
@@ -39,5 +38,11 @@ body {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }
