@@ -4,10 +4,14 @@ const ValueInput = ({
   value,
   handleBlur,
   customDisplay,
+  customClasses,
+  customInputClasses,
 }: {
   value: string | number | undefined;
   handleBlur?: Function;
   customDisplay?: string;
+  customClasses?: string;
+  customInputClasses?: string;
 }) => {
   const [clicked, setClicked] = useState(false);
   const [inputValue, setInputValue] = useState(value ? String(value) : '');
@@ -20,7 +24,7 @@ const ValueInput = ({
 
   return (
     <div
-      className="p-1 w-full cursor-pointer"
+      className={`w-full h-8 cursor-pointer ${customClasses ? customClasses : ''}`}
       onClick={(e) => {
         e.preventDefault();
         setClicked(true);
@@ -28,7 +32,7 @@ const ValueInput = ({
     >
       {clicked ? (
         <input
-          className="bg-slate-700 outline-none w-full"
+          className={`bg-slate-700 h-8 outline-none w-full p-1 m-0 ${customInputClasses ? customInputClasses : ''}`}
           value={inputValue}
           ref={inputRef}
           autoFocus
@@ -50,7 +54,7 @@ const ValueInput = ({
           }}
         />
       ) : (
-        <div>{customDisplay ?? value}</div>
+        <div className="p-1">{customDisplay ?? value}</div>
       )}
     </div>
   );
