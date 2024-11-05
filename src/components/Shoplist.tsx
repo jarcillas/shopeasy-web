@@ -43,7 +43,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
         />
       </h2>
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
-        <div className="basis-1/3 font-bold"></div>
+        <div className="basis-1/3 font-bold">NAME</div>
         <div className="basis-1/6 font-bold">QTY</div>
         <div className="basis-1/6 font-bold">UNIT</div>
         <div className="basis-1/6 font-bold text-right">UNIT PRICE</div>
