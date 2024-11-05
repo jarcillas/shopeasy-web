@@ -27,7 +27,7 @@ const ValueInput = ({
 
   return (
     <Tooltip>
-      <TooltipTrigger className="basis-full w-full text-left">
+      <TooltipTrigger className="h-full w-full text-left">
         <div
           className={`w-full h-8 cursor-pointer ${customClasses ? customClasses : ''}`}
           onClick={(e) => {

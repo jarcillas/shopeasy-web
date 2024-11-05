@@ -68,7 +68,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6">
+            <div className="basis-1/6 h-full">
               <ValueInput
                 value={shoplistItem.qty}
                 handleBlur={(e: Event) => {
@@ -81,7 +81,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6">
+            <div className="basis-1/6 h-full">
               <ValueInput
                 value={shoplistItem.unit}
                 handleBlur={(e: Event) => {
@@ -94,7 +94,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6">
+            <div className="basis-1/6 h-full">
               <ValueInput
                 value={shoplistItem.unitPrice}
                 handleBlur={(e: Event) => {
@@ -109,7 +109,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customDisplay={formatter.format(shoplistItem.unitPrice)}
               />
             </div>
-            <div className="basis-1/6 text-right">
+            <div className="basis-1/6 h-full flex items-center justify-end">
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
           </li>
