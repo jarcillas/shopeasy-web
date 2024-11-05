@@ -38,6 +38,8 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
           handleBlur={(e: Event) => {
             updateShoplist('name', (e.target as HTMLInputElement).value);
           }}
+          customClasses="hover:bg-slate-700"
+          hideTooltip
         />
       </h2>
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
@@ -92,7 +94,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6 text-right">
+            <div className="basis-1/6">
               <ValueInput
                 value={shoplistItem.unitPrice}
                 handleBlur={(e: Event) => {
@@ -102,7 +104,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                     (e.target as HTMLInputElement).value
                   );
                 }}
-                customClasses="hover:bg-slate-700"
+                customClasses="hover:bg-slate-700 text-right"
                 customInputClasses="text-right"
                 customDisplay={formatter.format(shoplistItem.unitPrice)}
               />
