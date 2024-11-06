@@ -55,7 +55,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             key={shoplistItemIdx}
             className="flex flex-row w-[800px] justify-between h-12 items-center px-2"
           >
-            <div className="basis-1/3">
+            <div className="basis-1/3 h-full">
               <ValueInput
                 value={shoplistItem.name}
                 handleBlur={(e: Event) => {
