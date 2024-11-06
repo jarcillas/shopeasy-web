@@ -27,7 +27,7 @@ const ValueInput = ({
 
   return (
     <Tooltip>
-      <TooltipTrigger className="h-full w-full text-left">
+      <TooltipTrigger className="h-full w-full text-left py-1">
         <div
           className={`w-full h-8 cursor-pointer ${customClasses ? customClasses : ''}`}
           onClick={(e) => {
@@ -62,11 +62,13 @@ const ValueInput = ({
               }}
             />
           ) : (
-            <div className="p-1 w-full">{customDisplay ?? value}</div>
+            <div className="p-1 h-8 w-full">{customDisplay ?? value}</div>
           )}
         </div>
       </TooltipTrigger>
-      <TooltipContent className={`${hideTooltip ? 'hidden' : ''}`}>
+      <TooltipContent
+        className={`bg-slate-200 rounded-sm text-slate-800 p-1.5 ${hideTooltip ? 'hidden' : ''}`}
+      >
         Click to Edit
       </TooltipContent>
     </Tooltip>

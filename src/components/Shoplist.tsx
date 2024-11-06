@@ -32,7 +32,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
 
   return (
     <>
-      <h2 className="text-lg font-bold my-2">
+      <h2 className="text-lg font-bold h-8 my-2">
         <ValueInput
           value={shoplist.name}
           handleBlur={(e: Event) => {
@@ -53,9 +53,9 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
         {shoplist.items.map((shoplistItem, shoplistItemIdx) => (
           <li
             key={shoplistItemIdx}
-            className="flex flex-row w-[800px] justify-between h-12 items-center px-2"
+            className="flex flex-row w-[800px] justify-between h-12 items-center"
           >
-            <div className="basis-1/3 h-full">
+            <div className="basis-1/3 h-full px-2">
               <ValueInput
                 value={shoplistItem.name}
                 handleBlur={(e: Event) => {
@@ -68,7 +68,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6 h-full">
+            <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.qty}
                 handleBlur={(e: Event) => {
@@ -81,7 +81,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6 h-full">
+            <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.unit}
                 handleBlur={(e: Event) => {
@@ -94,7 +94,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700"
               />
             </div>
-            <div className="basis-1/6 h-full">
+            <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.unitPrice}
                 handleBlur={(e: Event) => {
@@ -109,7 +109,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customDisplay={formatter.format(shoplistItem.unitPrice)}
               />
             </div>
-            <div className="basis-1/6 h-full flex items-center justify-end">
+            <div className="basis-1/6 h-full px-2 flex items-center justify-end">
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
           </li>
