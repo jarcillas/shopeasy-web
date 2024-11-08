@@ -14,6 +14,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const addShoplistItem = useStore((state) => state.addShoplistItem);
   const editShoplist = useStore((state) => state.editShoplist);
   const editShoplistItem = useStore((state) => state.editShoplistItem);
+  const deleteShoplistItem = useStore((state) => state.deleteShoplistItem);
 
   const updateShoplist = (
     key: keyof ShoplistType,
@@ -128,7 +129,12 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/6 h-full px-2 flex items-center justify-end">
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
-            <Button className="absolute text-transparent -right-10 size-8 rounded-full hover:bg-white hover:text-slate-700">
+            <Button
+              onClick={() => {
+                deleteShoplistItem(shoplist.id, shoplistItem.id);
+              }}
+              className="absolute text-transparent -right-10 size-8 rounded-full hover:bg-white hover:text-slate-700"
+            >
               <X strokeWidth={2.5} />
             </Button>
           </li>
