@@ -1,15 +1,17 @@
 import {
   Shoplist as ShoplistType,
   ShoplistItem as ShoplistItemType,
-  ShoplistItem,
 } from './types';
+import { Button } from './ui/button';
 import { ValueInput } from './ValueInput';
+import { X } from 'lucide-react';
 import { currencyFormatter } from '../util/number';
 import { useStore } from '../store';
 
 const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const formatter = currencyFormatter('en-ph', 'PHP');
 
+  const addShoplistItem = useStore((state) => state.addShoplistItem);
   const editShoplist = useStore((state) => state.editShoplist);
   const editShoplistItem = useStore((state) => state.editShoplistItem);
 
@@ -42,6 +44,20 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
           hideTooltip
         />
       </h2>
+      <Button
+        variant="outline"
+        className="text-slate-700 mt-2"
+        onClick={() => {
+          addShoplistItem(shoplist.id, {
+            id: shoplist.items.length,
+            qty: 1,
+            unitPrice: 0,
+            name: '',
+          });
+        }}
+      >
+        New Item
+      </Button>
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
         <div className="basis-1/3 font-bold">NAME</div>
         <div className="basis-1/6 font-bold">QTY</div>
@@ -53,7 +69,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
         {shoplist.items.map((shoplistItem, shoplistItemIdx) => (
           <li
             key={shoplistItemIdx}
-            className="flex flex-row w-[800px] justify-between h-12 items-center"
+            className="flex relative flex-row w-[800px] justify-between h-12 items-center"
           >
             <div className="basis-1/3 h-full px-2">
               <ValueInput
@@ -112,6 +128,9 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/6 h-full px-2 flex items-center justify-end">
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
+            <Button className="absolute text-transparent -right-10 size-8 rounded-full hover:bg-white hover:text-slate-700">
+              <X />
+            </Button>
           </li>
         ))}
       </ul>
