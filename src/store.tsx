@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Shoplist, ShoplistItem } from './components/types';
-import { shoplists } from './data.json';
 
 type State = {
   shoplists: Shoplist[];
@@ -49,7 +48,7 @@ export const useStore = create<State & Action>()(
     persist(
       (set) => ({
         // State
-        shoplists: shoplists,
+        shoplists: [],
 
         // Actions
         setShoplists: (newShoplists) =>

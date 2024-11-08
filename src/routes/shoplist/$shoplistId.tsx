@@ -2,12 +2,14 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { Shoplist } from '../../components/Shoplist';
 import { Total } from '../../components/Total';
+import { Button } from '@/components/ui/button';
 import { useStore } from '@/store';
 
 export const Route = createFileRoute('/shoplist/$shoplistId')({
   component: () => {
     const { shoplistId } = Route.useParams();
     const shoplists = useStore((state) => state.shoplists);
+    const deleteShoplist = useStore((state) => state.deleteShoplist);
     const shoplist = shoplists?.[Number(shoplistId)];
 
     console.log('Opened shoplist:');
@@ -18,10 +20,19 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
     }
 
     return (
-      <div className="mt-2 text-white">
+      <div className="mt-4 text-white">
         <h1 className="text-xl font-bold">What are we buying today?</h1>
         <Shoplist shoplist={shoplist} />
         <Total shoplistItems={shoplist.items} />
+        <Button
+          className="mt-4"
+          variant="destructive"
+          onClick={() => {
+            deleteShoplist(shoplist.id);
+          }}
+        >
+          Delete Shoplist
+        </Button>
       </div>
     );
   },
