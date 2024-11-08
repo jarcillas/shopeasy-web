@@ -129,7 +129,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
             <Button className="absolute text-transparent -right-10 size-8 rounded-full hover:bg-white hover:text-slate-700">
-              <X />
+              <X strokeWidth={2.5} />
             </Button>
           </li>
         ))}
