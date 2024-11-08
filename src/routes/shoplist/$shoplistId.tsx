@@ -18,7 +18,7 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
     }
 
     return (
-      <div className="mt-2 text-white">
+      <div className="mt-4 text-white">
         <h1 className="text-xl font-bold">What are we buying today?</h1>
         <Shoplist shoplist={shoplist} />
         <Total shoplistItems={shoplist.items} />
