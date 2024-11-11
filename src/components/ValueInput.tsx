@@ -1,20 +1,24 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { Proportions } from 'lucide-react';
 
-const ValueInput = ({
-  value,
-  handleBlur,
-  customDisplay,
-  customClasses,
-  customInputClasses,
-  hideTooltip,
-}: {
+interface ValueInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string | number | undefined;
   handleBlur?: Function;
   customDisplay?: string;
   customClasses?: string;
   customInputClasses?: string;
   hideTooltip?: boolean;
+}
+
+const ValueInput: React.FC<ValueInputProps> = ({
+  value,
+  handleBlur,
+  customDisplay,
+  customClasses,
+  customInputClasses,
+  hideTooltip,
+  ...inputProps
 }) => {
   const [clicked, setClicked] = useState(false);
   const [inputValue, setInputValue] = useState(value ? String(value) : '');
@@ -60,6 +64,7 @@ const ValueInput = ({
                   if (handleBlur) handleBlur(e);
                 }
               }}
+              {...inputProps}
             />
           ) : (
             <div className="p-1 h-8 w-full">{customDisplay ?? value}</div>
