@@ -1,1 +1,0 @@
-import{c as t,j as e}from"./index-Dbig1jBb.js";const c=t("/")({component:s});function s(){return e.jsx("div",{className:"mt-4",children:e.jsx("h3",{className:"text-white",children:"No shoplist selected"})})}export{c as Route};
