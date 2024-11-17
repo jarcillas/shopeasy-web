@@ -11,7 +11,6 @@ import { useStore } from '../store';
 const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const formatter = currencyFormatter('en-ph', 'PHP');
 
-  const addShoplistItem = useStore((state) => state.addShoplistItem);
   const editShoplist = useStore((state) => state.editShoplist);
   const editShoplistItem = useStore((state) => state.editShoplistItem);
   const deleteShoplistItem = useStore((state) => state.deleteShoplistItem);
@@ -49,19 +48,6 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
           hideTooltip
         />
       </h2>
-      <Button
-        variant="outline"
-        className="text-slate-700 mt-2"
-        onClick={() => {
-          addShoplistItem(shoplist.id, {
-            qty: 1,
-            unitPrice: 0,
-            name: '',
-          });
-        }}
-      >
-        New Item
-      </Button>
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
         <div className="basis-1/3 font-bold">NAME</div>
         <div className="basis-1/6 font-bold">QTY</div>
@@ -132,6 +118,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/6 h-full px-2 flex items-center justify-end">
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
+
             <Button
               onClick={() => {
                 deleteShoplistItem(shoplist.id, shoplistItem.id);
