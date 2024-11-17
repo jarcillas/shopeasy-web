@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-
+import { v4 } from 'uuid';
 import { Button } from './ui/button';
 import { useStore } from '@/store';
 
@@ -30,7 +30,7 @@ const Sidebar = () => {
         className="w-fit"
         onClick={() => {
           addShoplist({
-            id: shoplists.length,
+            id: v4(),
             name: `Shoplist ${shoplists.length + 1}`,
             items: [],
           });
