@@ -49,11 +49,13 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
         />
       </h2>
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
-        <div className="basis-1/3 font-bold">NAME</div>
-        <div className="basis-1/6 font-bold">QTY</div>
-        <div className="basis-1/6 font-bold">UNIT</div>
-        <div className="basis-1/6 font-bold text-right">UNIT PRICE</div>
-        <div className="basis-1/6 font-bold text-right">PRICE</div>
+        <div className="basis-1/3 font-bold select-none">NAME</div>
+        <div className="basis-1/6 font-bold select-none">QTY</div>
+        <div className="basis-1/6 font-bold select-none">UNIT</div>
+        <div className="basis-1/6 font-bold text-right select-none">
+          UNIT PRICE
+        </div>
+        <div className="basis-1/6 font-bold text-right select-none">PRICE</div>
       </div>
       <ul className="w-full divide-y divide-slate-400 border-b border-b-slate-400 border-slate-400">
         {shoplist.items.map((shoplistItem, shoplistItemIdx) => (
@@ -115,7 +117,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customDisplay={formatter.format(shoplistItem.unitPrice)}
               />
             </div>
-            <div className="basis-1/6 h-full px-2 flex items-center justify-end">
+            <div className="basis-1/6 h-full px-2 flex items-center justify-end select-none">
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
 
