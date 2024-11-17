@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
-import { Proportions } from 'lucide-react';
 
 interface ValueInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string | number | undefined;
@@ -29,9 +28,20 @@ const ValueInput: React.FC<ValueInputProps> = ({
     setInputValue(value ? String(value) : '');
   }, [value]);
 
+  // When the component is clicked, set focus to the input
+  useEffect(() => {
+    inputRef.current?.focus();
+    inputRef.current?.select();
+  }, [clicked]);
+
   return (
     <Tooltip>
-      <TooltipTrigger className="h-full w-full text-left py-1">
+      <TooltipTrigger
+        className="h-full w-full text-left py-1"
+        onFocus={(e) => {
+          setClicked(true);
+        }}
+      >
         <div
           className={`w-full h-8 cursor-pointer ${customClasses ? customClasses : ''}`}
           onClick={(e) => {
@@ -44,10 +54,10 @@ const ValueInput: React.FC<ValueInputProps> = ({
               className={`bg-slate-700 h-8 outline-none w-full p-1 m-0 ${customInputClasses ? customInputClasses : ''}`}
               value={inputValue}
               ref={inputRef}
-              autoFocus
-              onFocus={(e) => {
-                e.target.select();
-              }}
+              // autoFocus
+              // onFocus={(e) => {
+              //   e.target.select();
+              // }}
               onBlur={(e) => {
                 e.preventDefault();
                 setClicked(false);

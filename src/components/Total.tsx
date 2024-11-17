@@ -14,7 +14,7 @@ const Total = ({ shoplistItems = [] }: { shoplistItems: ShoplistItem[] }) => {
   const formatter = currencyFormatter('en-ph', 'PHP');
 
   return (
-    <div className="w-full text-right p-2 font-bold">
+    <div className="w-full text-right p-2 font-bold select-none">
       {formatter.format(total)}
     </div>
   );
