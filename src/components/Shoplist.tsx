@@ -29,8 +29,12 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
     key: keyof ShoplistItemType,
     value: ShoplistItemType[keyof ShoplistItemType]
   ) => {
-    const newShoplistItem = { ...shoplist.items[id], [key]: value };
-    editShoplistItem(shoplist.id, id, newShoplistItem);
+    const shoplistItem = shoplist.items?.find((item) => item.id === id);
+    // check first that shoplistItem exists
+    if (shoplistItem) {
+      const updatedShoplistItem = { ...shoplistItem, [key]: value };
+      editShoplistItem(shoplist.id, id, updatedShoplistItem);
+    }
   };
 
   return (
@@ -50,7 +54,6 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
         className="text-slate-700 mt-2"
         onClick={() => {
           addShoplistItem(shoplist.id, {
-            id: shoplist.items.length,
             qty: 1,
             unitPrice: 0,
             name: '',

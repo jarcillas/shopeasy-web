@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { v4 } from 'uuid';
 import { devtools, persist } from 'zustand/middleware';
 import { Shoplist, ShoplistItem } from './components/types';
 
@@ -13,7 +14,7 @@ type Action = {
   editShoplist: (shoplistId: Shoplist['id'], updatedShoplist: Shoplist) => void;
   addShoplistItem: (
     shoplistId: Shoplist['id'],
-    newShoplistItem: ShoplistItem
+    newShoplistItem: Omit<ShoplistItem, 'id'>
   ) => void;
   deleteShoplistItem: (
     shoplistId: Shoplist['id'],
@@ -97,7 +98,7 @@ export const useStore = create<State & Action>()(
             if (!shoplist) return state;
             const updatedShoplist: Shoplist = {
               ...shoplist,
-              items: [...shoplist.items, newShoplistItem],
+              items: [...shoplist.items, { id: v4(), ...newShoplistItem }],
             };
             return updateShoplist(state, shoplistId, updatedShoplist);
           }),

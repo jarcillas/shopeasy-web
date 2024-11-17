@@ -1,5 +1,5 @@
 export interface ShoplistItem {
-  id: number;
+  id: string;
   qty: number;
   unitPrice: number;
   unit?: string;
