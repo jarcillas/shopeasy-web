@@ -3,8 +3,9 @@ import {
   ShoplistItem as ShoplistItemType,
 } from './types';
 import { Button } from './ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { ValueInput } from './ValueInput';
-import { X } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import { currencyFormatter } from '../util/number';
 import { useStore } from '../store';
 
@@ -121,14 +122,21 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
               {formatter.format(shoplistItem.qty * shoplistItem.unitPrice)}
             </div>
 
-            <Button
-              onClick={() => {
-                deleteShoplistItem(shoplist.id, shoplistItem.id);
-              }}
-              className="absolute text-transparent -right-10 size-8 rounded-full hover:bg-white hover:text-slate-700"
-            >
-              <X strokeWidth={2.5} />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger className="absolute -right-10">
+                <Button
+                  onClick={() => {
+                    deleteShoplistItem(shoplist.id, shoplistItem.id);
+                  }}
+                  className="text-transparent size-8 rounded-full hover:bg-white hover:text-slate-700"
+                >
+                  <Trash strokeWidth={2.5} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="bg-slate-200 rounded-sm text-slate-800 p-1.5">
+                Delete Item
+              </TooltipContent>
+            </Tooltip>
           </li>
         ))}
       </ul>
