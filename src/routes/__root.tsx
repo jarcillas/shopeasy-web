@@ -4,6 +4,7 @@ import { lazy } from 'react';
 
 import { Sidebar } from '../components/Sidebar';
 import '../index.css';
+import { Header } from '@/components/Header';
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
@@ -21,12 +22,15 @@ export const Route = createRootRoute({
   component: () => {
     return (
       <TooltipProvider>
-        <div className="h-screen w-screen bg-slate-900">
-          <div className="flex flex-row">
-            <Sidebar />
-            <Outlet />
+        <div className="h-screen w-screen flex flex-col">
+          <Header />
+          <div className="h-full p-4 text-white bg-slate-900">
+            <div className="flex flex-row">
+              <Sidebar />
+              <Outlet />
+            </div>
+            <TanStackRouterDevtools position="bottom-right" />
           </div>
-          <TanStackRouterDevtools position="bottom-right" />
         </div>
       </TooltipProvider>
     );

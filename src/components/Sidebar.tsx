@@ -27,7 +27,7 @@ const Sidebar = () => {
       </ul>
       <Button
         variant={'outline'}
-        className="w-fit"
+        className="w-fit text-slate-700"
         onClick={() => {
           addShoplist({
             id: v4(),

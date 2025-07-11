@@ -12,6 +12,9 @@ export default {
       colors: {
         white: '#edf6f9',
       },
+      fontFamily: {
+        display: ['DM Serif Text'],
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
