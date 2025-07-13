@@ -15,6 +15,10 @@ export default {
       fontFamily: {
         display: ['DM Serif Text'],
       },
+      flexGrow: {
+        1: '1',
+        2: '2',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
