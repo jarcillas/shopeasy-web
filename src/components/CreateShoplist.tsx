@@ -40,7 +40,8 @@ const CreateShoplist = () => {
         ref={buttonRef}
         type="submit"
         className="text-slate-200"
-        onClick={() => {
+        onClick={(event) => {
+          event.preventDefault();
           addShoplist({
             id: v4(),
             name: inputValue,
