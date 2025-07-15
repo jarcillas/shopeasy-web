@@ -88,7 +88,7 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
         <Button
           variant={'outline'}
           type="button"
-          className="text-slate-700"
+          className="text-slate-700 w-16 flex-grow-0 flex-shrink-0"
           onClick={() => setExpanded((prev) => !prev)}
         >
           {expanded ? 'Less' : 'More'}
