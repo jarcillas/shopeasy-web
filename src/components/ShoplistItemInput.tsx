@@ -28,6 +28,10 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
   const [expandHeight, setExpandHeight] = useState(0);
   const addShoplistItem = useStore((state) => state.addShoplistItem);
   const expandableRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
+  const qtyRef = useRef<HTMLInputElement>(null);
+  const unitRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -57,6 +61,7 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
           onChange={(e) => {
             handleChange(e, 'name');
           }}
+          ref={nameRef}
         />
         <Input
           placeholder="Price"
@@ -65,6 +70,16 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
           className="border-slate-500 text-slate-300"
           onChange={(e) => {
             handleChange(e, 'unitPrice');
+          }}
+          ref={priceRef}
+          onKeyDown={(e) => {
+            if (expanded && e.key === 'Tab' && !e.shiftKey) {
+              e.preventDefault();
+              qtyRef.current?.focus();
+            } else if (!expanded && e.key === 'Tab' && !e.shiftKey) {
+              e.preventDefault();
+              nameRef.current?.focus();
+            }
           }}
         />
         <Button
@@ -114,6 +129,7 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
               onChange={(e) => {
                 handleChange(e, 'qty');
               }}
+              ref={qtyRef}
             />
             <Input
               placeholder="Unit"
@@ -121,6 +137,13 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
               className="border-slate-500 text-slate-300"
               onChange={(e) => {
                 handleChange(e, 'unit');
+              }}
+              ref={unitRef}
+              onKeyDown={(e) => {
+                if (e.key === 'Tab' && !e.shiftKey) {
+                  e.preventDefault();
+                  nameRef.current?.focus();
+                }
               }}
             />
           </div>
