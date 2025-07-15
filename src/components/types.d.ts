@@ -24,3 +24,7 @@ export interface Shoplist {
   created?: number;
   updated?: number;
 }
+
+// Utility to make one property optional
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
