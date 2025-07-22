@@ -50,7 +50,6 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
           hideTooltip
         />
       </h2>
-      {/* TODO: INSERT SHOPLIST ITEM INPUT HERE */}
       <ShoplistItemInput shoplist={shoplist} />
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
         <div className="basis-1/3 font-bold select-none">ITEM</div>
