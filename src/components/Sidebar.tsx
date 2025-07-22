@@ -1,11 +1,16 @@
 import { Link } from '@tanstack/react-router';
-import { v4 } from 'uuid';
 import { Button } from './ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { CreateShoplist } from './CreateShoplist';
+import { Plus } from 'lucide-react';
 import { useStore } from '@/store';
 
 const Sidebar = () => {
   const shoplists = useStore((state) => state.shoplists);
-  const addShoplist = useStore((state) => state.addShoplist);
 
   return (
     <div className="flex flex-col grow-0 shrink-0 w-[200px] m-4 space-y-4">
@@ -25,19 +30,20 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <Button
-        variant={'outline'}
-        className="w-fit text-slate-700"
-        onClick={() => {
-          addShoplist({
-            id: v4(),
-            name: `Shoplist ${shoplists.length + 1}`,
-            items: [],
-          });
-        }}
-      >
-        New Shoplist
-      </Button>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant={'outline'} className="w-fit text-slate-700">
+            Add Shoplist
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          align="start"
+          sideOffset={8}
+          className="p-2 flex flex-col gap-2 w-[200px]"
+        >
+          <CreateShoplist />
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };

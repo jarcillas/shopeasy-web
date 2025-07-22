@@ -4,6 +4,7 @@ import {
 } from './types';
 import { Button } from './ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { ShoplistItemInput } from './ShoplistItemInput';
 import { ValueInput } from './ValueInput';
 import { Trash } from 'lucide-react';
 import { currencyFormatter } from '../util/number';
@@ -39,7 +40,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
 
   return (
     <>
-      <h2 className="text-lg font-bold h-8 my-2">
+      <h2 className="text-3xl font-bold h-16 my-2">
         <ValueInput
           value={shoplist.name}
           handleBlur={(e: Event) => {
@@ -49,8 +50,9 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
           hideTooltip
         />
       </h2>
+      <ShoplistItemInput shoplist={shoplist} />
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
-        <div className="basis-1/3 font-bold select-none">NAME</div>
+        <div className="basis-1/3 font-bold select-none">ITEM</div>
         <div className="basis-1/6 font-bold select-none">QTY</div>
         <div className="basis-1/6 font-bold select-none">UNIT</div>
         <div className="basis-1/6 font-bold text-right select-none">

@@ -9,7 +9,6 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
   component: () => {
     const { shoplistId } = Route.useParams();
     const shoplists = useStore((state) => state.shoplists);
-    const addShoplistItem = useStore((state) => state.addShoplistItem);
     const deleteShoplist = useStore((state) => state.deleteShoplist);
     const shoplist = shoplists?.[Number(shoplistId)];
 
@@ -25,19 +24,6 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
         <h1 className="text-xl font-bold">What are we buying today?</h1>
         <Shoplist shoplist={shoplist} />
         <Total shoplistItems={shoplist.items} />
-        <Button
-          variant="outline"
-          className="text-slate-700 mt-2 mr-4"
-          onClick={() => {
-            addShoplistItem(shoplist.id, {
-              qty: 1,
-              unitPrice: 0,
-              name: '',
-            });
-          }}
-        >
-          Add New Item
-        </Button>
         <Button
           className="mt-4"
           variant="destructive"
