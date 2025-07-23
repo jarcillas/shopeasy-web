@@ -6,11 +6,12 @@ import { devtools } from 'zustand/middleware';
 
 type State = {
   shoplists: Shoplist[];
+  lastSaved: number | null;
 };
 
 type Action = {
   setShoplists: (newShoplists: Shoplist[]) => void;
-  addShoplist: (newShoplist: Shoplist) => void;
+  addShoplist: (newShoplist: Shoplist) => Promise<void>;
   deleteShoplist: (shoplistId: Shoplist['id']) => void;
   editShoplist: (shoplistId: Shoplist['id'], updatedShoplist: Shoplist) => void;
   addShoplistItem: (
@@ -26,34 +27,12 @@ type Action = {
     shoplistItemId: ShoplistItem['id'],
     updatedShoplistItem: ShoplistItem
   ) => void;
+  setLastSaved: (timestamp: number) => void;
+  saveShoplistToSupabase: (shoplistId: string) => Promise<void>;
+  fetchShoplists: (userId: string) => Promise<void>;
 };
 
-// helper function for updating a shoplist
-const updateShoplist = (
-  state: State,
-  shoplistId: Shoplist['id'],
-  updatedShoplist: Shoplist
-) => {
-  const shoplists = [...state.shoplists];
-  const updatedShoplistIdx = shoplists.findIndex(
-    (shoplist) => shoplist.id === shoplistId
-  );
-  shoplists.splice(updatedShoplistIdx, 1, updatedShoplist);
-  return {
-    ...state,
-    shoplists,
-  };
-};
-
-export const useStore = create<
-  State &
-    Action & {
-      lastSaved: number | null;
-      setLastSaved: (timestamp: number) => void;
-      saveShoplistToSupabase: (shoplistId: string) => Promise<void>;
-      fetchShoplists: (userId: string) => Promise<void>;
-    }
->()(
+export const useStore = create<State & Action>()(
   devtools((set, get) => ({
     shoplists: [],
     lastSaved: null,
@@ -72,15 +51,36 @@ export const useStore = create<
       }
     },
 
-    // All actions below are local only
-    addShoplist: (newShoplist) =>
-      set((state) => ({
-        shoplists: [...state.shoplists, newShoplist],
-      })),
-    deleteShoplist: (shoplistId) =>
-      set((state) => ({
-        shoplists: state.shoplists.filter((s) => s.id !== shoplistId),
-      })),
+    addShoplist: async (newShoplist) => {
+      const createdShoplist = {
+        ...newShoplist,
+        created: Math.floor(new Date().getTime() / 1000),
+        updated: Math.floor(new Date().getTime() / 1000),
+      };
+      const user = (await supabase.auth.getUser()).data.user;
+      if (!user) return;
+      const { data, error } = await supabase
+        .from('shoplists')
+        .insert([{ ...createdShoplist, user_id: user.id }])
+        .select();
+      if (!error && data) {
+        set((state) => ({ shoplists: [...state.shoplists, data[0]] }));
+      }
+    },
+    deleteShoplist: async (shoplistId) => {
+      const user = (await supabase.auth.getUser()).data.user;
+      if (!user) return;
+      const { data, error } = await supabase
+        .from('shoplists')
+        .delete()
+        .eq('id', shoplistId)
+        .eq('user_id', user.id);
+      if (!error && data) {
+        set((state) => ({
+          shoplists: state.shoplists.filter((s) => s.id !== shoplistId),
+        }));
+      }
+    },
     editShoplist: (shoplistId, updatedShoplist) =>
       set((state) => ({
         shoplists: state.shoplists.map((s) =>
