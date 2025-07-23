@@ -18,7 +18,6 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
     const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>(
       'idle'
     );
-    const [lastSaveTime, setLastSaveTime] = useState<string>('');
     const shoplist = shoplists?.[Number(shoplistId)];
 
     function timeAgo(timestamp: number) {

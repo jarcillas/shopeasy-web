@@ -6,7 +6,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { CreateShoplist } from './CreateShoplist';
-import { Plus } from 'lucide-react';
 import { useStore } from '@/store';
 
 const Sidebar = () => {
