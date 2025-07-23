@@ -1,11 +1,12 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 
 import { Sidebar } from '../components/Sidebar';
 import '../index.css';
 import { Header } from '@/components/Header';
 import { useAuth } from '@/hooks/useAuth';
+import { useStore } from '@/store';
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
@@ -22,6 +23,12 @@ const TanStackRouterDevtools =
 export const Route = createRootRoute({
   component: () => {
     const { user, loading } = useAuth();
+    const fetchShoplists = useStore((state) => state.fetchShoplists);
+    useEffect(() => {
+      if (user) {
+        fetchShoplists(user.id);
+      }
+    }, [user, fetchShoplists]);
     return (
       <TooltipProvider>
         <div className="h-screen w-screen flex flex-col">

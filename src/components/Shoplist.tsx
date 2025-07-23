@@ -9,6 +9,7 @@ import { ValueInput } from './ValueInput';
 import { Trash } from 'lucide-react';
 import { currencyFormatter } from '../util/number';
 import { useStore } from '../store';
+import { useEffect, useState } from 'react';
 
 const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const formatter = currencyFormatter('en-ph', 'PHP');
@@ -16,6 +17,21 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const editShoplist = useStore((state) => state.editShoplist);
   const editShoplistItem = useStore((state) => state.editShoplistItem);
   const deleteShoplistItem = useStore((state) => state.deleteShoplistItem);
+  const saveShoplistToSupabase = useStore(
+    (state) => state.saveShoplistToSupabase
+  );
+  const setLastSaved = useStore((state) => state.setLastSaved);
+
+  function timeAgo(timestamp: number) {
+    const now = Date.now();
+    const seconds = Math.floor((now - timestamp) / 1000);
+    if (seconds < 5) return 'just now';
+    if (seconds < 60) return `${seconds} seconds ago`;
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes} minutes ago`;
+    const hours = Math.floor(minutes / 60);
+    return `${hours} hours ago`;
+  }
 
   const updateShoplist = (
     key: keyof ShoplistType,
@@ -50,6 +66,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
           hideTooltip
         />
       </h2>
+
       <ShoplistItemInput shoplist={shoplist} />
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
         <div className="basis-1/3 font-bold select-none">ITEM</div>
