@@ -5,6 +5,7 @@ import { lazy } from 'react';
 import { Sidebar } from '../components/Sidebar';
 import '../index.css';
 import { Header } from '@/components/Header';
+import { useAuth } from '@/hooks/useAuth';
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
@@ -20,14 +21,25 @@ const TanStackRouterDevtools =
 
 export const Route = createRootRoute({
   component: () => {
+    const { user, loading } = useAuth();
     return (
       <TooltipProvider>
         <div className="h-screen w-screen flex flex-col">
           <Header />
           <div className="h-full p-4 text-white bg-slate-900">
             <div className="flex flex-row">
-              <Sidebar />
-              <Outlet />
+              {user && <Sidebar />}
+              <div className="flex-1">
+                {user ? (
+                  <Outlet />
+                ) : (
+                  !loading && (
+                    <div className="mt-8 text-center text-lg text-slate-300">
+                      Please log in to view your shoplists.
+                    </div>
+                  )
+                )}
+              </div>
             </div>
             <TanStackRouterDevtools position="bottom-right" />
           </div>
