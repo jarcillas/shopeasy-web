@@ -3,7 +3,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 interface ValueInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string | number | undefined;
-  handleBlur?: Function;
+  handleBlur?: (
+    event:
+      | React.FocusEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void;
   customDisplay?: string;
   customClasses?: string;
   customInputClasses?: string;
@@ -38,7 +42,7 @@ const ValueInput: React.FC<ValueInputProps> = ({
     <Tooltip>
       <TooltipTrigger
         className="h-full w-full text-left py-1"
-        onFocus={(e) => {
+        onFocus={() => {
           setClicked(true);
         }}
       >

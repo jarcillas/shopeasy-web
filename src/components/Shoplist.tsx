@@ -9,7 +9,6 @@ import { ValueInput } from './ValueInput';
 import { Trash } from 'lucide-react';
 import { currencyFormatter } from '../util/number';
 import { useStore } from '../store';
-import { useEffect, useState } from 'react';
 
 const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const formatter = currencyFormatter('en-ph', 'PHP');
@@ -17,21 +16,6 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
   const editShoplist = useStore((state) => state.editShoplist);
   const editShoplistItem = useStore((state) => state.editShoplistItem);
   const deleteShoplistItem = useStore((state) => state.deleteShoplistItem);
-  const saveShoplistToSupabase = useStore(
-    (state) => state.saveShoplistToSupabase
-  );
-  const setLastSaved = useStore((state) => state.setLastSaved);
-
-  function timeAgo(timestamp: number) {
-    const now = Date.now();
-    const seconds = Math.floor((now - timestamp) / 1000);
-    if (seconds < 5) return 'just now';
-    if (seconds < 60) return `${seconds} seconds ago`;
-    const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes} minutes ago`;
-    const hours = Math.floor(minutes / 60);
-    return `${hours} hours ago`;
-  }
 
   const updateShoplist = (
     key: keyof ShoplistType,
@@ -59,7 +43,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
       <h2 className="text-3xl font-bold h-16 my-2">
         <ValueInput
           value={shoplist.name}
-          handleBlur={(e: Event) => {
+          handleBlur={(e) => {
             updateShoplist('name', (e.target as HTMLInputElement).value);
           }}
           customClasses="hover:bg-slate-700"
@@ -86,7 +70,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/3 h-full px-2">
               <ValueInput
                 value={shoplistItem.name}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'name',
@@ -99,7 +83,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.qty}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'qty',
@@ -112,7 +96,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.unit}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'unit',
@@ -125,7 +109,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.unitPrice}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'unitPrice',

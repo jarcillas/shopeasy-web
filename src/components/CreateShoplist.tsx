@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { useStore } from '@/store';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-// import { Info } from 'lucide-react';
 import { v4 } from 'uuid';
 
 const CreateShoplist = () => {
