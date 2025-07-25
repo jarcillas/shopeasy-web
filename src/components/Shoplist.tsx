@@ -78,6 +78,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                   );
                 }}
                 customClasses="hover:bg-slate-700"
+                customDisplayClasses="flex items-center"
               />
             </div>
             <div className="basis-1/6 h-full px-2">
@@ -91,6 +92,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                   );
                 }}
                 customClasses="hover:bg-slate-700"
+                customDisplayClasses="flex items-center"
               />
             </div>
             <div className="basis-1/6 h-full px-2">
@@ -104,6 +106,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                   );
                 }}
                 customClasses="hover:bg-slate-700"
+                customDisplayClasses="flex items-center"
               />
             </div>
             <div className="basis-1/6 h-full px-2">
@@ -119,6 +122,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700 text-right"
                 customInputClasses="text-right"
                 customDisplay={formatter.format(shoplistItem.unitPrice)}
+                customDisplayClasses="flex items-center justify-end"
               />
             </div>
             <div className="basis-1/6 h-full px-2 flex items-center justify-end select-none">

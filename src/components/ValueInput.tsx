@@ -11,6 +11,7 @@ interface ValueInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   customDisplay?: string;
   customClasses?: string;
   customInputClasses?: string;
+  customDisplayClasses?: string;
   hideTooltip?: boolean;
 }
 
@@ -20,6 +21,7 @@ const ValueInput: React.FC<ValueInputProps> = ({
   customDisplay,
   customClasses,
   customInputClasses,
+  customDisplayClasses,
   hideTooltip,
   ...inputProps
 }) => {
@@ -81,7 +83,9 @@ const ValueInput: React.FC<ValueInputProps> = ({
               {...inputProps}
             />
           ) : (
-            <div className="p-1 h-8 w-full">{customDisplay ?? value}</div>
+            <div className={`px-1 h-8 w-full ${customDisplayClasses}`}>
+              {customDisplay ?? value}
+            </div>
           )}
         </div>
       </TooltipTrigger>

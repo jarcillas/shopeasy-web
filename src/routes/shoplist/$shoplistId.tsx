@@ -45,33 +45,35 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
 
     return (
       <div className="mt-4 text-white">
-        <h1 className="text-xl font-bold">What are we buying today?</h1>
-        <Shoplist shoplist={shoplist} />
-        <Total shoplistItems={shoplist.items} />
-        <div className="flex flex-row gap-2 mt-4">
-          <Button
-            variant="outline"
-            className="text-slate-700"
-            onClick={handleSave}
-          >
-            Save
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => {
-              deleteShoplist(shoplist.id);
-            }}
-          >
-            Delete Shoplist
-          </Button>
-          {saveStatus === 'saving' && (
-            <span className="text-slate-400 text-sm ml-2">Saving...</span>
-          )}
-          {saveStatus === 'saved' && (
-            <span className="text-green-400 text-sm ml-2">
-              Saved ({timeAgo(Date.now())})
-            </span>
-          )}
+        <div className="w-[800px]">
+          <h1 className="text-xl font-bold">What are we buying today?</h1>
+          <Shoplist shoplist={shoplist} />
+          <Total shoplistItems={shoplist.items} />
+          <div className="flex flex-row gap-2 mt-4">
+            <Button
+              variant="outline"
+              className="text-slate-700"
+              onClick={handleSave}
+            >
+              Save
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                deleteShoplist(shoplist.id);
+              }}
+            >
+              Delete Shoplist
+            </Button>
+            {saveStatus === 'saving' && (
+              <span className="text-slate-400 text-sm ml-2">Saving...</span>
+            )}
+            {saveStatus === 'saved' && (
+              <span className="text-green-400 text-sm ml-2">
+                Saved ({timeAgo(Date.now())})
+              </span>
+            )}
+          </div>
         </div>
       </div>
     );
