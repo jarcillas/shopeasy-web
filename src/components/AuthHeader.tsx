@@ -2,20 +2,21 @@ import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { User } from '@supabase/supabase-js';
 
 export function AuthHeader({
   onAuthChange,
 }: {
-  onAuthChange?: (user: any) => void;
+  onAuthChange?: (user: User | null) => void;
 }) {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
   const popoverTriggerRef = useRef<HTMLButtonElement>(null);
-  const signupPopoverRef = useRef<HTMLButtonElement>(null);
+  // const signupPopoverRef = useRef<HTMLButtonElement>(null);
 
   // Sets up the initial user state and listens for auth state changes
   // If onAuthChange is provided, it will be called with the user object whenever the auth state changes
@@ -116,7 +117,7 @@ export function AuthHeader({
           </form>
         </PopoverContent>
       </Popover>
-      <Popover>
+      {/* <Popover>
         <PopoverTrigger asChild>
           <Button
             ref={signupPopoverRef}
@@ -181,7 +182,7 @@ export function AuthHeader({
             </Button>
           </form>
         </PopoverContent>
-      </Popover>
+      </Popover> */}
     </div>
   );
 }
