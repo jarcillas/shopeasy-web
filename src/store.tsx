@@ -163,13 +163,19 @@ export const useStore = create<State & Action>()(
         .eq('id', shoplistId)
         .select();
       if (!error && data) {
-        set({
-          shoplists: data.map((shoplist) => ({
-            ...shoplist,
-            items: Array.isArray(shoplist.items) ? shoplist.items : [],
-          })),
+        set((state) => ({
+          shoplists: state.shoplists.map((s) => {
+            if (s.id === shoplistId) {
+              return {
+                ...s,
+                ...data[0],
+                items: Array.isArray(data[0].items) ? data[0].items : [],
+              };
+            }
+            return s;
+          }),
           lastSaved: Date.now(),
-        });
+        }));
       }
     },
   }))
