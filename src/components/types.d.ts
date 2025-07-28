@@ -19,10 +19,10 @@ export interface ShoplistItemInput {
 export interface Shoplist {
   id: string;
   name: string;
-  description?: string;
+  description?: string | null;
   items: ShoplistItem[];
-  created?: number;
-  updated?: number;
+  created?: number | null;
+  updated?: number | null;
 }
 
 // Utility to make one property optional

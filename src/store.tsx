@@ -47,7 +47,17 @@ export const useStore = create<State & Action>()(
         .eq('user_id', userId)
         .order('created', { ascending: true });
       if (!error && data) {
-        set({ shoplists: data });
+        set({
+          shoplists: data.map((shoplist) => {
+            const parsedItems: ShoplistItem[] = JSON.parse(
+              shoplist.items as string
+            );
+            return {
+              ...shoplist,
+              items: parsedItems,
+            };
+          }),
+        });
       }
     },
 
@@ -61,10 +71,23 @@ export const useStore = create<State & Action>()(
       if (!user) return;
       const { data, error } = await supabase
         .from('shoplists')
-        .insert([{ ...createdShoplist, user_id: user.id }])
+        .insert([
+          {
+            ...createdShoplist,
+            user_id: user.id,
+            items: JSON.stringify(createdShoplist.items),
+          },
+        ])
         .select();
       if (!error && data) {
-        set((state) => ({ shoplists: [...state.shoplists, data[0]] }));
+        const newShoplist = {
+          ...data[0],
+          items:
+            typeof data[0].items === 'string'
+              ? JSON.parse(data[0].items)
+              : data[0].items,
+        };
+        set((state) => ({ shoplists: [...state.shoplists, newShoplist] }));
       }
     },
     deleteShoplist: async (shoplistId) => {
@@ -141,6 +164,7 @@ export const useStore = create<State & Action>()(
         .from('shoplists')
         .update({
           ...shoplist,
+          items: JSON.stringify(shoplist.items),
           updated: Math.floor(Date.now() / 1000),
         })
         .eq('id', shoplistId)
@@ -148,7 +172,17 @@ export const useStore = create<State & Action>()(
       if (!error && data) {
         set({
           shoplists: state.shoplists.map((s) =>
-            s.id === shoplistId ? data[0] : s
+            s.id === shoplistId
+              ? {
+                  ...data[0],
+                  items:
+                    typeof data[0].items === 'string'
+                      ? JSON.parse(data[0].items)
+                      : Array.isArray(data[0].items)
+                        ? data[0].items
+                        : [],
+                }
+              : s
           ),
           lastSaved: Date.now(),
         });
