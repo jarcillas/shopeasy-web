@@ -48,15 +48,10 @@ export const useStore = create<State & Action>()(
         .order('created', { ascending: true });
       if (!error && data) {
         set({
-          shoplists: data.map((shoplist) => {
-            const parsedItems: ShoplistItem[] = JSON.parse(
-              shoplist.items as string
-            );
-            return {
-              ...shoplist,
-              items: parsedItems,
-            };
-          }),
+          shoplists: data.map((shoplist) => ({
+            ...shoplist,
+            items: Array.isArray(shoplist.items) ? shoplist.items : [],
+          })),
         });
       }
     },
@@ -75,21 +70,19 @@ export const useStore = create<State & Action>()(
           {
             ...createdShoplist,
             user_id: user.id,
-            items: JSON.stringify(createdShoplist.items),
+            items: createdShoplist.items, // <-- cast to any/Json for Supabase
           },
         ])
         .select();
       if (!error && data) {
         const newShoplist = {
           ...data[0],
-          items:
-            typeof data[0].items === 'string'
-              ? JSON.parse(data[0].items)
-              : data[0].items,
+          items: Array.isArray(data[0].items) ? data[0].items : [],
         };
         set((state) => ({ shoplists: [...state.shoplists, newShoplist] }));
       }
     },
+
     deleteShoplist: async (shoplistId) => {
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
@@ -164,26 +157,17 @@ export const useStore = create<State & Action>()(
         .from('shoplists')
         .update({
           ...shoplist,
-          items: JSON.stringify(shoplist.items),
+          items: shoplist.items,
           updated: Math.floor(Date.now() / 1000),
         })
         .eq('id', shoplistId)
         .select();
       if (!error && data) {
         set({
-          shoplists: state.shoplists.map((s) =>
-            s.id === shoplistId
-              ? {
-                  ...data[0],
-                  items:
-                    typeof data[0].items === 'string'
-                      ? JSON.parse(data[0].items)
-                      : Array.isArray(data[0].items)
-                        ? data[0].items
-                        : [],
-                }
-              : s
-          ),
+          shoplists: data.map((shoplist) => ({
+            ...shoplist,
+            items: Array.isArray(shoplist.items) ? shoplist.items : [],
+          })),
           lastSaved: Date.now(),
         });
       }
