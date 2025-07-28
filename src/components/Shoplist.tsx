@@ -43,13 +43,14 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
       <h2 className="text-3xl font-bold h-16 my-2">
         <ValueInput
           value={shoplist.name}
-          handleBlur={(e: Event) => {
+          handleBlur={(e) => {
             updateShoplist('name', (e.target as HTMLInputElement).value);
           }}
           customClasses="hover:bg-slate-700"
           hideTooltip
         />
       </h2>
+
       <ShoplistItemInput shoplist={shoplist} />
       <div className="flex flex-row w-[800px] justify-between h-12 items-center px-2">
         <div className="basis-1/3 font-bold select-none">ITEM</div>
@@ -69,7 +70,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
             <div className="basis-1/3 h-full px-2">
               <ValueInput
                 value={shoplistItem.name}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'name',
@@ -77,12 +78,13 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                   );
                 }}
                 customClasses="hover:bg-slate-700"
+                customDisplayClasses="flex items-center"
               />
             </div>
             <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.qty}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'qty',
@@ -90,12 +92,13 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                   );
                 }}
                 customClasses="hover:bg-slate-700"
+                customDisplayClasses="flex items-center"
               />
             </div>
             <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.unit}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'unit',
@@ -103,12 +106,13 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                   );
                 }}
                 customClasses="hover:bg-slate-700"
+                customDisplayClasses="flex items-center"
               />
             </div>
             <div className="basis-1/6 h-full px-2">
               <ValueInput
                 value={shoplistItem.unitPrice}
-                handleBlur={(e: Event) => {
+                handleBlur={(e) => {
                   updateShoplistItem(
                     shoplistItem.id,
                     'unitPrice',
@@ -118,6 +122,7 @@ const Shoplist = ({ shoplist }: { shoplist: ShoplistType }) => {
                 customClasses="hover:bg-slate-700 text-right"
                 customInputClasses="text-right"
                 customDisplay={formatter.format(shoplistItem.unitPrice)}
+                customDisplayClasses="flex items-center justify-end"
               />
             </div>
             <div className="basis-1/6 h-full px-2 flex items-center justify-end select-none">

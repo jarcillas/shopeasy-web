@@ -3,10 +3,15 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 interface ValueInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string | number | undefined;
-  handleBlur?: Function;
+  handleBlur?: (
+    event:
+      | React.FocusEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void;
   customDisplay?: string;
   customClasses?: string;
   customInputClasses?: string;
+  customDisplayClasses?: string;
   hideTooltip?: boolean;
 }
 
@@ -16,6 +21,7 @@ const ValueInput: React.FC<ValueInputProps> = ({
   customDisplay,
   customClasses,
   customInputClasses,
+  customDisplayClasses,
   hideTooltip,
   ...inputProps
 }) => {
@@ -38,7 +44,7 @@ const ValueInput: React.FC<ValueInputProps> = ({
     <Tooltip>
       <TooltipTrigger
         className="h-full w-full text-left py-1"
-        onFocus={(e) => {
+        onFocus={() => {
           setClicked(true);
         }}
       >
@@ -77,7 +83,9 @@ const ValueInput: React.FC<ValueInputProps> = ({
               {...inputProps}
             />
           ) : (
-            <div className="p-1 h-8 w-full">{customDisplay ?? value}</div>
+            <div className={`px-1 h-8 w-full ${customDisplayClasses}`}>
+              {customDisplay ?? value}
+            </div>
           )}
         </div>
       </TooltipTrigger>

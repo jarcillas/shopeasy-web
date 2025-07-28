@@ -14,6 +14,7 @@ export default {
       },
       fontFamily: {
         display: ['DM Serif Text'],
+        regular: ['Roboto', 'sans-serif'],
       },
       flexGrow: {
         1: '1',
