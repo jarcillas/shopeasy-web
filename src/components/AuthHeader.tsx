@@ -53,6 +53,11 @@ export function AuthHeader({
     }
   };
 
+  const handleTryDemoUser = () => {
+    setEmail('test@shopeasy.com');
+    setPassword('password');
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
   };
@@ -113,6 +118,15 @@ export function AuthHeader({
               disabled={loading}
             >
               {loading ? 'Logging in...' : 'Login'}
+            </Button>
+            <Button
+              type="button"
+              variant="default"
+              className="text-slate-700 bg-green-400 hover:bg-green-500"
+              disabled={loading}
+              onClick={handleTryDemoUser}
+            >
+              Use Test Credentials
             </Button>
           </form>
         </PopoverContent>
