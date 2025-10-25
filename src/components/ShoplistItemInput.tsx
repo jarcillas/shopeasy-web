@@ -52,12 +52,12 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
   }, [expanded, itemInput]);
 
   return (
-    <form className="flex flex-col gap-x-2 p-2 bg-slate-700 rounded-md">
+    <form className="flex flex-col gap-x-2 py-2 rounded-md">
       <div className="flex flex-row items-center gap-x-2">
         <Input
           placeholder="Item Name"
           value={itemInput.name}
-          className="flex-grow-2 border-slate-500 text-slate-300"
+          className="flex-grow-2 border-slate-500 bg-slate-700 text-slate-300"
           onChange={(e) => {
             handleChange(e, 'name');
           }}
@@ -67,7 +67,7 @@ const ShoplistItemInput = ({ shoplist }: ShoplistItemInputProps) => {
           placeholder="Price"
           type="number"
           value={itemInput.unitPrice}
-          className="border-slate-500 text-slate-300"
+          className="border-slate-500 bg-slate-700 text-slate-300"
           onChange={(e) => {
             handleChange(e, 'unitPrice');
           }}
