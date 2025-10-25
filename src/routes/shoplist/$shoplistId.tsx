@@ -49,7 +49,7 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
           <h1 className="text-xl font-bold">What are we buying today?</h1>
           <Shoplist shoplist={shoplist} />
           <Total shoplistItems={shoplist.items} />
-          <div className="flex flex-row gap-2 mt-4">
+          <div className="flex flex-row gap-2 mt-4 items-center">
             <Button
               variant="outline"
               className="text-slate-700"
@@ -66,12 +66,14 @@ export const Route = createFileRoute('/shoplist/$shoplistId')({
               Delete Shoplist
             </Button>
             {saveStatus === 'saving' && (
-              <span className="text-slate-400 text-sm ml-2">Saving...</span>
+              <div className="text-slate-400 text-sm ml-2 h-full">
+                Saving...
+              </div>
             )}
             {saveStatus === 'saved' && (
-              <span className="text-green-400 text-sm ml-2">
+              <div className="text-green-400 text-sm ml-2 h-full">
                 Saved ({timeAgo(Date.now())})
-              </span>
+              </div>
             )}
           </div>
         </div>
